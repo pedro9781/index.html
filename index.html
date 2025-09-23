@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horários</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name = "theme-color" content="#00000">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transition: background 1s ease-in-out;
+    }
+
+    /* Fundo animado */
+    .fundo-animado {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -1;
+      animation: moverFundo 120s linear infinite;
+    }
+
+    @keyframes moverFundo {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .estrelas {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .estrela {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: piscar 2s infinite;
+    }
+
+    @keyframes piscar {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    .container {
+      position: relative;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 30px 50px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      text-align: center;
+      min-width: 300px;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    }
+
+    #tipoDia {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 8px 0;
+      color: #ffeb3b;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    }
+
+    #frase {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin: 15px 0;
+      transition: opacity 0.5s ease;
+      min-height: 1.4em;
+    }
+
+    #data, #relogio, #mensagemDia {
+      margin: 5px 0;
+    }
+
+    button {
+      margin-top: 20px;
+      background: white;
+      color: black;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: #ddd;
+      transform: scale(1.05);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="fundo-animado" id="fundoAnimado"></div>
+  <div class="estrelas" id="estrelas"></div>
+
+  <div class="container">
+    <h1 id="saudacao"></h1>
+    <p id="data"></p>
+    <p id="relogio"></p>
+
+    <!-- NOVO ID para mostrar se é dia útil ou final de semana -->
+    <p id="tipoDia"></p>
+
+    <p id="frase"></p>
+    <p id="mensagemDia"></p>
+    <button onclick="trocarTurno()">Trocar de Turno</button>
+  </div>
+
+  <script>
+    const turnos = [
+      { 
+        saudacao: "Bom dia! 😄", 
+        fundo: "istockphoto-491701259-612x612.jpg",
+        frases: [
+          "Hoje é um ótimo dia para começar algo novo!",
+          "Acredite em você: o esforço vale a pena!",
+          "Cada manhã é uma nova chance de brilhar!"
+        ]
+      },
+      { 
+        saudacao: "Boa tarde! 🌇", 
+        fundo: "diego-ph-vTitvl4O2kE-unsplash-300x200.jpg",
+        frases: [
+          "Continue firme, a vitória está próxima!",
+          "A tarde é perfeita para recarregar energia.",
+          "Seus esforços estão construindo o seu futuro!"
+        ]
+      },
+      { 
+        saudacao: "Boa noite! 🌃", 
+        fundo: "istockphoto-532378051-612x612.jpg",
+        frases: [
+          "Relaxe e descanse, amanhã será incrível!",
+          "Use a noite para renovar suas forças.",
+          "Gratidão transforma a sua noite em paz."
+        ]
+      }
+    ];
+
+    let turnoAtual = 0;
+    let fraseIndex = 0;
+    let intervaloFrases;
+    const estrelasContainer = document.getElementById('estrelas');
+    const fundoAnimado = document.getElementById('fundoAnimado');
+
+    function criarEstrelas() {
+      estrelasContainer.innerHTML = '';
+      for (let i = 0; i < 50; i++) {
+        const estrela = document.createElement('div');
+        estrela.classList.add('estrela');
+        estrela.style.top = Math.random() * 100 + '%';
+        estrela.style.left = Math.random() * 100 + '%';
+        estrela.style.animationDuration = (Math.random() * 2 + 1) + 's';
+        estrelasContainer.appendChild(estrela);
+      }
+    }
+
+    function atualizarEstrelas() {
+      if (turnoAtual === 2) {
+        estrelasContainer.style.display = 'block';
+        criarEstrelas();
+      } else {
+        estrelasContainer.style.display = 'none';
+      }
+    }
+
+    function atualizarTela() {
+      fundoAnimado.style.backgroundImage = `url(${turnos[turnoAtual].fundo})`;
+      fundoAnimado.style.backgroundSize = "cover";
+      fundoAnimado.style.backgroundPosition = "center";
+
+      document.getElementById("saudacao").innerText = turnos[turnoAtual].saudacao;
+      document.title = turnos[turnoAtual].saudacao;
+
+      iniciarFrases();
+      mostrarMensagemDia();
+      atualizarEstrelas();
+    }
+
+    function iniciarFrases() {
+      clearInterval(intervaloFrases);
+      fraseIndex = 0;
+      mostrarFrase();
+      intervaloFrases = setInterval(() => {
+        fraseIndex = (fraseIndex + 1) % turnos[turnoAtual].frases.length;
+        mostrarFrase();
+      }, 3000);
+    }
+
+    function mostrarFrase() {
+      const fraseElem = document.getElementById("frase");
+      fraseElem.style.opacity = 0;
+      setTimeout(() => {
+        fraseElem.innerText = turnos[turnoAtual].frases[fraseIndex];
+        fraseElem.style.opacity = 1;
+      }, 300);
+    }
+
+    function mostrarMensagemDia() {
+      const agora = new Date();
+      const diaSemana = agora.getDay();
+      const tipoDiaElem = document.getElementById("tipoDia");
+      const mensagemElem = document.getElementById("mensagemDia");
+
+      if (diaSemana >= 1 && diaSemana <= 5) {
+        tipoDiaElem.innerText = "📅 DIA ÚTIL";
+        mensagemElem.innerText = "💼 Continue se esforçando e dando o seu melhor!";
+      } else {
+        tipoDiaElem.innerText = "🎉 FINAL DE SEMANA";
+        mensagemElem.innerText = "🎊 Aproveite para descansar e se divertir!";
+      }
+    }
+
+    function trocarTurno() {
+      turnoAtual = (turnoAtual + 1) % turnos.length;
+      atualizarTela();
+    }
+
+    function definirTurnoInicial() {
+      const hora = new Date().getHours();
+      if (hora >= 6 && hora < 12) turnoAtual = 0;
+      else if (hora >= 12 && hora < 18) turnoAtual = 1;
+      else turnoAtual = 2;
+      atualizarTela();
+    }
+
+    function verificarMudancaTurno() {
+      const hora = new Date().getHours();
+      let novoTurno;
+      if (hora >= 6 && hora < 12) novoTurno = 0;
+      else if (hora >= 12 && hora < 18) novoTurno = 1;
+      else novoTurno = 2;
+
+      if (novoTurno !== turnoAtual) {
+        turnoAtual = novoTurno;
+        atualizarTela();
+      }
+    }
+
+    function atualizarRelogio() {
+      const agora = new Date();
+      const horas = String(agora.getHours()).padStart(2, "0");
+      const minutos = String(agora.getMinutes()).padStart(2, "0");
+      const segundos = String(agora.getSeconds()).padStart(2, "0");
+
+      document.getElementById("relogio").innerText = `${horas}:${minutos}:${segundos}`;
+
+      const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById("data").innerText = agora.toLocaleDateString("pt-BR", opcoes);
+
+      verificarMudancaTurno();
+    }
+
+    definirTurnoInicial();
+    atualizarRelogio();
+    setInterval(atualizarRelogio, 1000);
+  </script>
+
+  <!-- Service Worker embutido -->
+  <script id="service-worker" type="text/javascript">
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register("service-Worker.js")
+        .then(()=> console.log("service Worker registradp "))
+        .catch(err => console.log("Erro no SW:" , err));
+
+
+
+
+
+    }
+  </script>
+</body>
+</html>
