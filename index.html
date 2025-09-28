@@ -6,7 +6,9 @@
   <title>AppVendas</title>
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#6200ea" />
-  <link rel="icon" href="icons/icone-192.png" type="image/png" />
+  <link rel="icon" sizes="192x192" href="https://cdn-icons-png.flaticon.com/512/891/891419.png" type="image/png">
+<link rel="icon" sizes="512x512" href="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" type="image/png">
+
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -224,42 +226,43 @@
     };
 
     const produtosIniciais = [
-      {
-        id: 'p1',
-        nome: 'Pijama Feminino Estampado',
-        descricao: 'Conjunto de pijama feminino, leve, com estampa floral.',
-        preco: 79.90,
-        imagem: 'https://via.placeholder.com/300x200?text=Pijama+Feminino'
-      },
-      {
-        id: 'p2',
-        nome: 'Pijama Masculino Manga Longa',
-        descricao: 'Pijama masculino de manga longa e calça comprida.',
-        preco: 99.90,
-        imagem: 'https://via.placeholder.com/300x200?text=Pijama+Masculino'
-      },
-      {
-        id: 'p3',
-        nome: 'Robe de Microfibra',
-        descricao: 'Robe leve de microfibra, ideal para usar após o banho.',
-        preco: 129.90,
-        imagem: 'https://via.placeholder.com/300x200?text=Robe'
-      },
-      {
-        id: 'p4',
-        nome: 'Meias Soquete Sortidas (3 pares)',
-        descricao: 'Kit com 3 pares de meias soquete coloridas.',
-        preco: 29.90,
-        imagem: 'https://via.placeholder.com/300x200?text=Meias'
-      },
-      {
-        id: 'p5',
-        nome: 'Pantufa de Pelúcia',
-        descricao: 'Pantufa confortável de pelúcia, unissex.',
-        preco: 49.90,
-        imagem: 'https://via.placeholder.com/300x200?text=Pantufa'
-      }
-    ];
+  {
+    id: 'p1',
+    nome: 'Vestido Estampado Feminino',
+    descricao: 'Vestido leve de verão, com estampa floral e tecido macio.',
+    preco: 139.90,
+    imagem: 'https://images.unsplash.com/photo-1593032457869-04c1a8576f1b?auto=format&fit=crop&w=500&q=80'
+  },
+  {
+    id: 'p2',
+    nome: 'Camisa Social Masculina Slim',
+    descricao: 'Camisa social masculina, ideal para trabalho ou eventos.',
+    preco: 119.90,
+    imagem: 'https://images.unsplash.com/photo-1585386959984-a4155224c8d0?auto=format&fit=crop&w=500&q=80'
+  },
+  {
+    id: 'p3',
+    nome: 'Jaqueta Jeans Feminina',
+    descricao: 'Jaqueta jeans de alta qualidade, modelagem moderna.',
+    preco: 199.90,
+    imagem: 'https://images.unsplash.com/photo-1542060748-10c28b62716f?auto=format&fit=crop&w=500&q=80'
+  },
+  {
+    id: 'p4',
+    nome: 'Blusa Casual Masculina',
+    descricao: 'Blusa de algodão com estampa discreta, ideal para o dia a dia.',
+    preco: 89.90,
+    imagem: 'https://images.unsplash.com/photo-1618354691211-65d4b4ad49af?auto=format&fit=crop&w=500&q=80'
+  },
+  {
+    id: 'p5',
+    nome: 'Conjunto Moletom Unissex',
+    descricao: 'Moletom completo, ideal para dias frios. Muito confortável.',
+    preco: 149.90,
+    imagem: 'https://images.unsplash.com/photo-1585386959984-a4155224c8d0?auto=format&fit=crop&w=500&q=80'
+  }
+];
+
 
     function salvarNoStorage(chave, valor) {
       localStorage.setItem(chave, JSON.stringify(valor));
