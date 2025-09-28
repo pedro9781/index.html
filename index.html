@@ -358,28 +358,78 @@
   };
 
   const produtosIniciais = [
-    {
-      id: 'p1',
-      nome: 'Vestido Estampado Feminino',
-      descricao: 'Vestido leve de verão, com estampa floral e tecido macio.',
-      preco: 139.90,
-      imagem: 'https://images.unsplash.com/photo-1593032457869-04c1a8576f1b?auto=format&fit=crop&w=500&q=80'
-    },
-    {
-      id: 'p2',
-      nome: 'Camisa Social Masculina Slim',
-      descricao: 'Camisa social masculina, ideal para trabalho ou eventos.',
-      preco: 119.90,
-      imagem: 'https://images.unsplash.com/photo-1585386959984-a4155224c8d0?auto=format&fit=crop&w=500&q=80'
-    },
-    {
-      id: 'p3',
-      nome: 'Jaqueta Jeans Feminina',
-      descricao: 'Jaqueta jeans de alta qualidade, modelagem moderna.',
-      preco: 199.90,
-      imagem: 'https://images.unsplash.com/photo-1600185363689-6bf2f50b2c7e?auto=format&fit=crop&w=500&q=80'
-    },
-  ];
+  {
+    id: 'p1',
+    nome: 'Vestido Estampado Feminino',
+    descricao: 'Vestido leve de verão, com estampa floral e tecido macio.',
+    preco: 139.90,
+    imagem: 'https://images.unsplash.com/photo-1593032457869-04c1a8576f1b?auto=format&fit=crop&w=500&q=80'
+  },
+  {
+    id: 'p2',
+    nome: 'Camisa Social Masculina Slim',
+    descricao: 'Camisa social masculina, ideal para trabalho ou eventos.',
+    preco: 119.90,
+    imagem: 'https://images.unsplash.com/photo-1585386959984-a4155224c8d0?auto=format&fit=crop&w=500&q=80'
+  },
+  {
+    id: 'p3',
+    nome: 'Jaqueta Jeans Feminina',
+    descricao: 'Jaqueta jeans de alta qualidade, modelagem moderna.',
+    preco: 199.90,
+    imagem: 'https://images.unsplash.com/photo-1542060748-10c28b62716f?auto=format&fit=crop&w=500&q=80'
+  },
+  {
+    id: 'p4',
+    nome: 'Blusa Casual Masculina',
+    descricao: 'Blusa de algodão com estampa discreta, ideal para o dia a dia.',
+    preco: 89.90,
+    imagem: 'https://images.unsplash.com/photo-1618354691211-65d4b4ad49af?auto=format&fit=crop&w=500&q=80'
+  },
+  {
+    id: 'p5',
+    nome: 'Conjunto Moletom Unissex',
+    descricao: 'Moletom completo, ideal para dias frios. Muito confortável.',
+    preco: 149.90,
+    imagem: 'https://images.unsplash.com/photo-1585386959984-a4155224c8d0?auto=format&fit=crop&w=500&q=80'
+  },
+  // Produtos adicionais
+  {
+    id: 'p6',
+    nome: 'Saia Midi Floral',
+    descricao: 'Saia midi com estampa floral, ideal para ocasiões informais.',
+    preco: 89.90,
+    imagem: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=500&q=80'
+  },
+  {
+    id: 'p7',
+    nome: 'Tênis Casual Unissex',
+    descricao: 'Tênis confortável para uso diário, com design moderno.',
+    preco: 179.90,
+    imagem: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=500&q=80'
+  },
+  {
+    id: 'p8',
+    nome: 'Camiseta Básica Masculina',
+    descricao: 'Camiseta básica, feita com algodão premium.',
+    preco: 59.90,
+    imagem: 'https://images.unsplash.com/photo-1530845648727-51d50c29326f?auto=format&fit=crop&w=500&q=80'
+  },
+  {
+    id: 'p9',
+    nome: 'Calça Jeans Feminina',
+    descricao: 'Calça jeans com modelagem slim e stretch para conforto.',
+    preco: 159.90,
+    imagem: 'https://images.unsplash.com/photo-1495121605193-b116b5b09a91?auto=format&fit=crop&w=500&q=80'
+  },
+  {
+    id: 'p10',
+    nome: 'Casaco de Lã Masculino',
+    descricao: 'Casaco quente, ideal para dias frios, com design clássico.',
+    preco: 299.90,
+    imagem: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=500&q=80'
+  }
+];
 
   // Slides de propaganda
   const slides = [
@@ -797,7 +847,7 @@
       alert('Seu carrinho está vazio!');
       return;
     }
-    const telefone = '5511999999999'; // Coloque seu número aqui no formato internacional (55 + DDD + número)
+    const telefone = '5531993309593'; // Coloque seu número aqui no formato internacional (55 + DDD + número)
     let mensagem = `Olá, meu nome é ${sessao.nome}.\nGostaria de fazer o pedido:\n`;
 
     carrinho.forEach(item => {
